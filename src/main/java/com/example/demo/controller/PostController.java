@@ -24,18 +24,18 @@ public class PostController {
         }
         return "this page";
     }
-    @GetMapping("/save")
+    @GetMapping("/post")
     public String post(Model model){
         model.addAttribute("post",new Post());
         return "save";
     }
-    @GetMapping("/save/{id}")
+    @GetMapping("/pucth/{id}")
     public String putch(@PathVariable("id") Long id,Model model){
         model.addAttribute("post",postServiceApi.get(id));
         return "save";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/post")
     public String save(Post post, Model model){
         postServiceApi.save(post);
         return "redirect:/";

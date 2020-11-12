@@ -1,8 +1,8 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
-import java.io.File;
-import java.util.Date;
+import java.sql.Blob;
+import java.sql.Date;
 
 @Entity
 public class Post {
@@ -12,11 +12,11 @@ public class Post {
     @Column
     private String content;
     @Column
-    private File image;
+    private java.sql.Blob image;
     @Column
     private String category;
     @Column
-    private Date creationDate;
+    private Date creation_date;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class Post {
         this.content = content;
     }
 
-    public File getImage() {
+    public Blob getImage() {
         return image;
     }
 
-    public void setImage(File image) {
+    public void setImage(Blob image) {
         this.image = image;
     }
 
@@ -51,10 +51,10 @@ public class Post {
     }
 
     public Date getCreationDate() {
-        return creationDate;
+        return creation_date;
     }
 
     public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+        this.creation_date = creationDate;
     }
 }
