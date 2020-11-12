@@ -17,6 +17,7 @@ public class PostController {
         model.addAttribute("list",postServiceApi.getAll());
         return "index";
     }
+
     @RequestMapping("/{id}")
     public String getId(@PathVariable("id")Long id, Model model){
         if(id != null){
@@ -24,23 +25,22 @@ public class PostController {
         }
         return "this page";
     }
-    @GetMapping("/post")
-    public String post(Model model){
-        model.addAttribute("post",new Post());
-        return "save";
-    }
-    @GetMapping("/pucth/{id}")
-    public String putch(@PathVariable("id") Long id,Model model){
-        model.addAttribute("post",postServiceApi.get(id));
+
+    @GetMapping("/save/{id}")
+    public String showSave(@PathVariable("id")Long id, Model model){
+        if(id != null){
+            model.addAttribute("post",postServiceApi.get(id));
+        }else {
+            model.addAttribute("post",new Post());
+        }
         return "save";
     }
 
-    @PostMapping("/post")
-    public String save(Post post, Model model){
+    @PostMapping("/save")
+    public String save(Post post,Model model){
         postServiceApi.save(post);
         return "redirect:/";
     }
-
     @GetMapping("/delete/:{id}")
     public String delete(@PathVariable Long id, Model model){
         postServiceApi.delete(id);
