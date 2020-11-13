@@ -18,34 +18,34 @@ public class PostController {
         return "index.html";
     }
 
-    @GetMapping("/show.html/{id}")
+    @GetMapping("/show/{id}")
     public String getId(@PathVariable("id")Long id, Model model){
         if(id != null){
             model.addAttribute("list",postServiceApi.get(id));
         }
-        return "show.html";
+        return "show";
     }
 
     @GetMapping("/save/{id}")
-    public String showSave(@PathVariable Long id, Model model){
-        if(id != null && id !=0){
+    public String showSave(@PathVariable(value="id")  Long id, Model model){
+        if(id != null &&id !=0){
             model.addAttribute("post",postServiceApi.get(id));
         }else {
             model.addAttribute("post",new Post());
         }
-        return "save.html";
+        return "save";
     }
 
     @PostMapping("/save")
     public String save(Post post,Model model){
         postServiceApi.save(post);
-        return "redirect:/";
+        return "redirect:index";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, Model model){
+    public String delete(@PathVariable(value="id") Long id, Model model){
         postServiceApi.delete(id);
-        return "redirect:/";
+        return "redirect:index";
     }
 
 
