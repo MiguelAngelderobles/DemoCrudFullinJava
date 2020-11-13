@@ -11,20 +11,23 @@
 <body>
 <div class = "container">
     <br>
-    <div th:if="${!list[id]}">
-        <h2>social network</h2>
+    <div th:if="${!list}">
+        <h2>Social network</h2>
         <table class="table">
             <thead>
             <tr>
-                <th>Content List</th>
+                <th>Content</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Creation Date</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="post : ${list[0]}">
-                <td th:text=" ${post.content}" >
-                <td th:text=" ${post.image}" >
-                <td th:text=" ${post.category}" >
-                <td th:text=" ${post.creation_date}" >
+                <td th:text="${post.content[0]}" >a hearth</td>
+                <td th:text="${post.image[0]}" ><3</td>
+                <td th:text="${post.category[0]}"> love </td>
+                <td th:text="${post.creation_date[0]}" >1922-12-12</td>
 
             </tr>
             </tbody>
