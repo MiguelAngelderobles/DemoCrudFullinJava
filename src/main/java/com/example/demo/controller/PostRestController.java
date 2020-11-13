@@ -5,10 +5,8 @@ import com.example.demo.service.api.PostServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -22,8 +20,23 @@ public class PostRestController {
         return postServiceApi.getAll();
     }
 
-    private ResponseEntity<Post> post(@RequestBody Post post){
+    @GetMapping(value= "/find/{id}")
+    private Post find(@PathVariable Long id){
+        return postServiceApi.get(id);
+    }
+    @GetMapping(value = "/save")
+    private ResponseEntity<Post> save(@RequestBody Post post){
         Post obj = postServiceApi.save(post);
         return new ResponseEntity<Post>(obj, HttpStatus.OK);
+    }
+    @GetMapping(value = "delete")
+    private ResponseEntity<Post> delete(@PathVariable Long id){
+        Post post = postServiceApi.get(id);
+        if(post != null){
+            postServiceApi.delete(id);
+        }else{
+            return new ResponseEntity<Post>(post,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<Post>(post, HttpStatus.OK);
     }
 }
